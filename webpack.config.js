@@ -46,7 +46,9 @@ module.exports = {
         new extract({
             filename: 'bundle.css'
         }),
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+        }),
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false })
     ],
     devServer: {
