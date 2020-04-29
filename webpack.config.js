@@ -5,12 +5,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: path.resolve(__dirname, 'src/index.js'),
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
-
+    resolve: {
+        modules: [
+            path.resolve(__dirname, 'node_modules'),
+            path.resolve(__dirname, './src'),
+        ]
+    },
     module: {
         rules: [
             {
@@ -19,7 +24,14 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: [
+                            '@babel/preset-env',
+                            {
+                                'plugins': [
+                                    "@babel/plugin-proposal-class-properties"
+                                ]
+                            }
+                        ]
                     }
                 }
             },
@@ -47,7 +59,7 @@ module.exports = {
             filename: 'bundle.css'
         }),
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: path.resolve(__dirname, 'src/index.html'),
         }),
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false })
     ],
