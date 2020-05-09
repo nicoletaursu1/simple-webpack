@@ -1,8 +1,15 @@
-// Write your code right here)
+"use strict";
 import './index.sass';
+import regeneratorRuntime from 'regenerator-runtime';
+import App from 'components/App';
 
-const template1 = document.getElementById('h1-template');
-const app = document.getElementById('app');
-const changed = template1.content.cloneNode(true);
+const appContainer = document.getElementById('app');
+const adToDoForm = document.getElementById('to-do__add_form');
 
-app.appendChild(changed);
+const app = new App({
+    name: 'app',
+    appContainer,
+    adToDoForm,
+});
+
+app.render();

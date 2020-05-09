@@ -28,12 +28,17 @@ module.exports = {
                             '@babel/preset-env',
                             {
                                 'plugins': [
-                                    "@babel/plugin-proposal-class-properties"
+                                    "@babel/plugin-proposal-class-properties",
+                                    "@babel/plugin-transform-regenerator"
                                 ]
                             }
                         ]
                     }
                 }
+            },
+            {
+                test: /\.html$/i,
+                loader: 'html-loader',
             },
             {
                 test:/\.(sa|sc|c)ss$/,
@@ -43,6 +48,15 @@ module.exports = {
                     },
                     {
                         loader: 'css-loader'
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true,
+                            config: {
+                                path: 'postcss.config.js'
+                            }
+                        }
                     },
                     {
                         loader: 'sass-loader',
