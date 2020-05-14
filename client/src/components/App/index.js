@@ -9,6 +9,19 @@ export default class App extends LocalStorage {
 
         adToDoForm.addEventListener('submit', this.onAddTask);
     }
+    getInitialState = () => new Promise((res)=>{
+        setTimeout(()=>{
+            const state = this.state
+            console.log(state)
+            return res(state)
+        },1000)
+    });
+
+    async fetchTodo(){
+        const tasks = await fetch ('http://localhost:3000/todo');
+        const res = await tasks.json()
+        return res
+    }
 
     validateFormValue = (form, name) => form?.get(name)?.length > 2;
 
@@ -39,6 +52,18 @@ export default class App extends LocalStorage {
     };
 
     render = () => {
+        this.getInitialState().then((res) => {
+            if(!res.length){
+                this.fetchTodo().then(data =>{
+                    this.state=data
+                    console.log('State: ',data)
+                    console.log('Fetched')
+                })
+            }
+            else {console.log('Didn\'t fetch')}
+        }).catch( err =>{
+            console.log('Cannot get initial state: '+err)
+        })
         const state = this.state;
         const list = document.createElement('ul');
         list.className = 'to-do__list';
