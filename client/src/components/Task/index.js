@@ -12,7 +12,7 @@ class Task extends LocalStorage {
         this.isDone = isDone;
         this.text = text;
         this.date = date;
-        this.id = id || this.generateId();
+        this.id = id || Task.generateId();
 
         this.element = this.buildTemplate();
     }
