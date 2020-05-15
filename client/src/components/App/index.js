@@ -12,7 +12,6 @@ export default class App extends LocalStorage {
     getInitialState = () => new Promise((res) => {
         setTimeout(() => {
             const state = this.state
-            console.log(state)
             return res(state)
         }, 1000)
     });
@@ -61,24 +60,24 @@ export default class App extends LocalStorage {
         }
     };
 
-    render = () => {
-        this.getInitialState().then((res) => {
-            if (!res.length) {
-                this.fetchTodo().then(data => {
-                    this.state = data
-                    console.log('State: ', data)
-                    console.log('Fetched')
-                    this.renderFetched(data)
-                })
+    render = async () => {
+        try{
+        const initialState = await this.getInitialState()
+            if (!initialState.length) {
+                const data = await this.fetchTodo()
+                this.state = data
+                console.log('State: ', data)
+                console.log('Fetched')
+                this.renderFetched(data)
             }
             else {
                 console.log('Didn\'t fetch')
                 const state = this.state;
                 this.renderFetched(state)
             }
-        }).catch(err => {
-            console.log('Cannot get initial state: ' + err)
-        })
-
-    };
-}
+        } catch(err) {
+            console.log('Cannot get initial state: ', err)
+        }
+        }
+        
+    }
