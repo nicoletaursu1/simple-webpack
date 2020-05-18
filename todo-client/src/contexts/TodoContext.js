@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useReducer } from 'react'
 import { TodoReducer } from '../reducers/TodoReducer'
 import useLocalStorage from '../utils/LocalStorage'
 
-export const TodoContext = createContext()
+export const TodoContext = createContext({ tasks: [] })
 //const initialTasks = {isDone: 0, text: 'Code', date: '12.12.12', id: 123}
 const TodoContextProvider = (props) => {
     

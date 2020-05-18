@@ -6,7 +6,7 @@ export const TodoReducer = (state, action) =>{
         case 'ADD_TASK':
             return [...state, {
                 isDone: 0,
-                text: action.task.text,
+                text: action.task,
                 date: Date.now(),
                 id: Date.now() + Math.random() * 1000
             }
