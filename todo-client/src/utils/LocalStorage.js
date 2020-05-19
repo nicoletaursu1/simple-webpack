@@ -1,15 +1,16 @@
-import { useState } from 'react' 
+import { useState, useEffect } from 'react'
 
-export const useLocalStorage = (name) => {
+export const useLocalStorage = (name, initialTasks) => {
+   const [localState, setLocalState] = useState(() => {
+       const tasks = JSON.parse(localStorage.getItem(name)) || initialTasks
+       return tasks
+   })
 
-    const [item, setState] = useState(name ? JSON.parse(localStorage.getItem(name)) || [] : [])
+    useEffect(() => {
+       localStorage.setItem(name, JSON.stringify(localState))
+    }, [localState])
 
-    const setItem = (newItem) => {
-        localStorage.setItem(name, JSON.stringify(newItem))
-        setState(newItem)
-    }
-
-    return [item, setItem]
+    return [localState, setLocalState]
 
 }
 

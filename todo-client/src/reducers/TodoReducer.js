@@ -1,8 +1,5 @@
 export const TodoReducer = (state, action) =>{
     switch (action.type){
-        // case 'GET_TASKS':
-        //     const localTasks = localStorage.getItem('app')
-        //     return localTasks ? JSON.parse(localTasks) : []
         case 'ADD_TASK':
             return [...state, {
                 isDone: 0,

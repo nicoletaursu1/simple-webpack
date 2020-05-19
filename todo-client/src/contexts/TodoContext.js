@@ -1,17 +1,15 @@
-import React, { createContext, useEffect, useReducer } from 'react'
+import React, { createContext, useReducer } from 'react'
 import { TodoReducer } from '../reducers/TodoReducer'
-import useLocalStorage from '../utils/LocalStorage'
+import { useLocalStorage } from '../utils/LocalStorage'
 
 export const TodoContext = createContext({ tasks: [] })
-//const initialTasks = {isDone: 0, text: 'Code', date: '12.12.12', id: 123}
-const TodoContextProvider = (props) => {
-    
-    const [tasks, dispatch] = useReducer(TodoReducer, [])
-    console.log(tasks)
-    useEffect(() => {
-        localStorage.setItem('app', JSON.stringify(tasks))
-    }, [tasks])
 
+const TodoContextProvider = (props) => {
+    const [localState, setLocalState] = useLocalStorage('app', [])
+    const [tasks, dispatch] = useReducer(TodoReducer, localState)
+    
+    console.log(tasks)
+    
     return (
         <TodoContext.Provider value={{ tasks, dispatch }}>
             {props.children}
