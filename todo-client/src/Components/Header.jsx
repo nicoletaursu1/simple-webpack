@@ -1,14 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
+import { StyledHeader } from '../styles/styled-components'
 
-const StyledHeader = styled.div`
-    font: 24px/24px Arial, sans-serif;
-    color: #8b8b8b;
-    text-align: center;
-    &::first-letter{
-    color: indianred;
-    }
-`
+
 const Header = () => {
    
     return ( 
