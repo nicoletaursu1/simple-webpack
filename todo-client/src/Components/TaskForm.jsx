@@ -15,6 +15,7 @@ const TaskForm = () => {
     const handleChange = (e) => {
         setText(e.target.value)
     }
+    
     return (
         <StyledForm onSubmit={handleSubmit}>
             <StyledInput

@@ -5,28 +5,23 @@ import { StyledList, StyledText } from '../styles/styled-components'
 
 const TodoList = () => {
     const { tasks } = useContext(TodoContext)
-    const memTasks = useMemo(() => {
-        return tasks.map(task => ({
-            ...task
-        }))
-    }, [tasks])
+
+    const memTasks = useMemo(() =>
+        tasks.map(task =>
+            <Task key={task.id} task={task} />
+        ), [tasks])
 
     return (
         <>
-        { memTasks.length ? 
-            (
-            <StyledList>
-                { memTasks.map(task => (
-                    <Task key={task.id} task={task} />
-                ))
-                }
-            </StyledList>
-            ) : 
-            <StyledText> No tasks. Enjoy your free time! </StyledText>
+            {memTasks.length ?
+                (
+                    <StyledList>{ memTasks }</StyledList>
+                ) :
+                <StyledText> No tasks. Enjoy your free time! </StyledText>
 
-        }
+            }
         </>
     )
-        
+
 }
 export default TodoList

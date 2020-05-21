@@ -1,13 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useReducer } from 'react'
+import { TodoReducer } from '../reducers/TodoReducer'
 
-export const useLocalStorage = (name, initialTasks) => {
-   
-   const [localState] = useState(() => {
-    const tasks = JSON.parse(localStorage.getItem(name)) || initialTasks
-    return tasks
-   })
+export const getState = () => {
+    const state = JSON.parse(localStorage.getItem('app')) || []
+    return state
+}
+export const useLocalStorage = (initialTasks) => {
 
-    return localState
+    const [localState, dispatch] = useReducer(TodoReducer, initialTasks)
+
+    useEffect( () => {
+        localStorage.setItem('app', JSON.stringify(localState))
+    }, [localState])
+
+    return [localState, dispatch]
 
 }
 

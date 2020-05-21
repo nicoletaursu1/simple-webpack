@@ -105,6 +105,23 @@ const StyledDate = styled.span`
     font-size: 11px;
     color: #a5a5a5;
 `
+const StyledEditForm = styled.form`
+    flex: 1;
+    padding: 0;
+    margin: 0;
+`
+const StyledEditInput = styled.input`
+    outline: none;
+    width: 100%;
+    appearance: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    font: 14px/16px Arial, sans-serif;
+    padding: 0;
+    border-bottom: 1px solid #cfcfcf;
+
+`
 export {StyledList, StyledText, StyledForm, StyledInput, StyledAddButton,
         StyledButton, TodoListItem, StyledCheckmark, StyledTaskText,
-        StyledDate, StyledHeader }
+        StyledDate, StyledHeader, StyledEditForm, StyledEditInput }
