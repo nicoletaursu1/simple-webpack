@@ -2,8 +2,7 @@ import { useEffect, useReducer } from 'react'
 import { TodoReducer } from '../reducers/TodoReducer'
 
 export const getState = () => {
-    const state = JSON.parse(localStorage.getItem('app')) || []
-    return state
+    return  JSON.parse(localStorage.getItem('app')) || []
 }
 export const useLocalStorage = (initialTasks) => {
 
