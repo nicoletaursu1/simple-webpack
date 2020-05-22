@@ -71,14 +71,39 @@ const TodoListItem = styled.li`
   border: 1px solid #cfcfcf;
   border-radius: 2px;
   box-sizing: border-box;
-  &:not(:last-child){
+    ${ props => props.isDone === 1 && `
+        margin-top: 40px;
+            &::before{
+            content: 'COMPLETE';
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            padding: 0;
+            margin: auto;
+            font: 14px Arial, sans-serif;
+            font-weight: 500;
+            color: #8b8b8b;
+            text-align: center;
+            transform: translateY(-150%);
+            }
+        &~&{
+            margin-top: initial;
+            &::before{
+                content: none;
+            }
+        }
+    `
+    }
+    &:not(:last-child){
     margin-bottom: 15px
-  }
-  & > *:not(:last-child){
+    }
+    & > *:not(:last-child){
     margin-right: 10px
-  }
-
+    }
 `
+
 const StyledButton = styled.i`
     font-size: 18px;
     cursor: pointer;
@@ -87,11 +112,11 @@ const StyledButton = styled.i`
 const StyledCheckmark = styled.i`
     font-size: 18px;
     cursor: pointer;
-    ${ props => props.isDone === 0 &&`
+    ${ props => props.isDone === 0 && `
         color: gray;
     `}
     
-    ${ props => props.isDone === 1 &&`
+    ${ props => props.isDone === 1 && `
         color: green;
     `}
 `
@@ -122,6 +147,8 @@ const StyledEditInput = styled.input`
     border-bottom: 1px solid #cfcfcf;
 
 `
-export {StyledList, StyledText, StyledForm, StyledInput, StyledAddButton,
-        StyledButton, TodoListItem, StyledCheckmark, StyledTaskText,
-        StyledDate, StyledHeader, StyledEditForm, StyledEditInput }
+export {
+    StyledList, StyledText, StyledForm, StyledInput, StyledAddButton,
+    StyledButton, TodoListItem, StyledCheckmark, StyledTaskText,
+    StyledDate, StyledHeader, StyledEditForm, StyledEditInput
+}

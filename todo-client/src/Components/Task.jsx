@@ -19,11 +19,7 @@ const Task = ({ task }) => {
 
     useEffect(() => {
         isEdit && inputRef.current.focus()
-    }, [isEdit, setIsEdit])
-
-    const onClick = () => {
-        setIsEdit(!isEdit)
-    }
+    }, [isEdit])
 
     const onSubmit = useCallback((e) => {
         e.preventDefault()
@@ -49,12 +45,12 @@ const Task = ({ task }) => {
                 <StyledEditInput type='text' value={value} ref={inputRef} onChange={onChange} onBlur={onSubmit} />
             </StyledEditForm>
             :
-            <StyledTaskText onClick={onClick}>{value}</StyledTaskText>
+            <StyledTaskText onClick={() => setIsEdit(true)}>{value}</StyledTaskText>
         )
-        }, [value, isEdit, onClick, onSubmit, task.id, inputRef])
+        }, [value, isEdit, onSubmit, task.id, inputRef])
 
     return (
-        <TodoListItem>
+        <TodoListItem isDone={task.isDone}>
 
             <StyledCheckmark isDone={task.isDone} onClick={
                 () => dispatch({ type: 'CHECK_TASK', id: task.id })}
